@@ -91,9 +91,8 @@ To add these keywords to Ajv instance:
 
 ```javascript
 var Ajv = require('ajv');
-var addMergePatch = require('ajv-merge-patch');
 var ajv = new Ajv({ v5: true });
-addMergePatch(ajv);
+require('ajv-merge-patch')(ajv);
 ```
 
 ## Using in the browser
@@ -103,15 +102,13 @@ You can include these keywords in your code using browserify.
 To include only `$merge` keyword:
 
 ```javascript
-var addMerge = require('ajv-merge-patch/keywords/merge');
-addMerge(ajv);
+require('ajv-merge-patch/keywords/merge')(ajv);
 ```
 
 To include only `$patch` keyword:
 
 ```javascript
-var addPatch = require('ajv-merge-patch/keywords/patch');
-addPatch(ajv);
+require('ajv-merge-patch/keywords/patch')(ajv);
 ```
 
 ## License

@@ -4,7 +4,8 @@
   "description": "$merge and $patch keywords for Ajv JSON-Schema validator to extend schemas",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test-cov",
+    "eslint": "if-node-version '>=4' eslint index.js keywords spec",
+    "test": "npm run eslint && npm run test-cov",
     "test-spec": "mocha spec/*.spec.js -R spec",
     "test-cov": "istanbul cover -x '**/spec/**' node_modules/mocha/bin/_mocha -- spec/*.spec.js -R spec"
   },
@@ -37,6 +38,8 @@
   },
   "devDependencies": {
     "ajv": "^4.4.0",
+    "eslint": "^3.3.0",
+    "if-node-version": "^1.0.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2"
   }

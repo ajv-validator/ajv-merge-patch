@@ -23,7 +23,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
       "type": "object",
       "required": [ "source", "with" ],
       "additionalProperties": false,
-      "properties": { 
+      "properties": {
         "source": {
           "anyOf": [
             {

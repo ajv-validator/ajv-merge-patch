@@ -13,9 +13,8 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
     macro: function (schema, parentSchema) {
       var source = schema.source;
       var patch = schema.with;
-      if (source.$ref)
-        source = copy(ajv.getSchema(source.$ref).schema);
-
+      if (source.$ref) source = copy(ajv.getSchema(source.$ref).schema);
+      if (patch.$ref) patch = ajv.getSchema(patch.$ref).schema;
       jsonPatch.apply(source, patch, true);
       return source;
     },

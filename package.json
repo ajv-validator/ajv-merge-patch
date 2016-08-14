@@ -1,0 +1,41 @@
+{
+  "name": "ajv-merge-patch",
+  "version": "0.1.0",
+  "description": "$merge and $patch keywords for Ajv JSON-Schema validator to extend schemas",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test-spec",
+    "test-spec": "mocha spec/*.spec.js -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epoberezkin/ajv-merge-patch.git"
+  },
+  "keywords": [
+    "JSON",
+    "schema",
+    "validator",
+    "validation",
+    "jsonschema",
+    "json-schema",
+    "json-schema-validator",
+    "json-schema-validation",
+    "$merge",
+    "$patch",
+    "keyword"
+  ],
+  "author": "Evgeny Poberezkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/epoberezkin/ajv-merge-patch/issues"
+  },
+  "homepage": "https://github.com/epoberezkin/ajv-merge-patch#readme",
+  "dependencies": {
+    "fast-json-patch": "^1.0.0",
+    "json-merge-patch": "^0.2.3"
+  },
+  "devDependencies": {
+    "ajv": "^4.4.0",
+    "mocha": "^3.0.2"
+  }
+}

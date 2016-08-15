@@ -77,6 +77,11 @@ The same schema extension using `$patch` keyword:
 
 In the majority of cases `$merge` format is easier to understand and to maintain. `$patch` can be used for extensions and changes that cannot be expressed using `$merge`.
 
+`with` property in keywords can also be a reference to a part of some schema, in which case the resolved value will be used rather than the actual object with property `$ref`.
+
+__Please note__: In case the `source` schema or the patch in `with` keyword use `$ref`, they won't take into account the resolution scope for their internal $refs defined by the parent objects - they will be used as separate objects.
+
+
 See also:
 - [v5 proposal](https://github.com/daveclayton/json-schema-validator/wiki/v5:-merge)
 - [$merge and $patch tests](https://github.com/epoberezkin/ajv-merge-patch/blob/master/spec)

@@ -63,7 +63,7 @@ describe('keyword $patch', function() {
     }
   });
 
-  it.skip('should extend schema defined with relative $ref', function() {
+  it('should extend schema defined with relative $ref', function() {
     ajvInstances.forEach(testMerge);
 
     function testMerge(ajv) {

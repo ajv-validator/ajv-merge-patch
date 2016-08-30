@@ -1,5 +1,7 @@
 'use strict';
 
+var url = require('url');
+
 function copy(o, to) {
   to = to || {};
   for (var key in o) to[key] = o[key];
@@ -10,13 +12,19 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
   if (!ajv._opts.v5)
     throw new Error('keyword ' + keyword + ' requires v5 option');
   ajv.addKeyword(keyword, {
-    macro: function (schema, parentSchema) {
+    macro: function (schema, parentSchema, it) {
       var source = schema.source;
       var patch = schema.with;
-      if (source.$ref) source = copy(ajv.getSchema(source.$ref).schema);
-      if (patch.$ref) patch = ajv.getSchema(patch.$ref).schema;
+      if (source.$ref) source = copy(getSchema(source.$ref));
+      if (patch.$ref) patch = getSchema(patch.$ref);
       jsonPatch.apply(source, patch, true);
       return source;
+
+      function getSchema($ref) {
+        if (it.baseId && it.baseId != '#')
+          $ref = url.resolve(it.baseId, $ref);
+        return ajv.getSchema($ref).schema;
+      }
     },
     metaSchema: {
       "type": "object",

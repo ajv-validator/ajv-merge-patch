@@ -63,7 +63,7 @@ describe('keyword $merge', function() {
     }
   });
 
-  it.skip('should extend schema defined with relative $ref', function() {
+  it('should extend schema defined with relative $ref', function() {
     ajvInstances.forEach(testMerge);
 
     function testMerge(ajv) {
@@ -120,7 +120,7 @@ describe('keyword $merge', function() {
     }
   });
 
-  it.skip('should extend schema with patch defined with relative $ref', function() {
+  it('should extend schema with patch defined with relative $ref', function() {
     ajvInstances.forEach(testMerge);
 
     function testMerge(ajv) {

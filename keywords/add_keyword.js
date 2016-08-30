@@ -2,12 +2,6 @@
 
 var url = require('url');
 
-function copy(o, to) {
-  to = to || {};
-  for (var key in o) to[key] = o[key];
-  return to;
-}
-
 module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
   if (!ajv._opts.v5)
     throw new Error('keyword ' + keyword + ' requires v5 option');
@@ -15,7 +9,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
     macro: function (schema, parentSchema, it) {
       var source = schema.source;
       var patch = schema.with;
-      if (source.$ref) source = copy(getSchema(source.$ref));
+      if (source.$ref) source = JSON.parse(JSON.stringify(getSchema(source.$ref)));
       if (patch.$ref) patch = getSchema(patch.$ref);
       jsonPatch.apply(source, patch, true);
       return source;

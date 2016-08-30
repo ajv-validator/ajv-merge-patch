@@ -21,9 +21,12 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
       return source;
 
       function getSchema($ref) {
-        if (it.baseId && it.baseId != '#')
-          $ref = url.resolve(it.baseId, $ref);
-        return ajv.getSchema($ref).schema;
+        var id = it.baseId && it.baseId != '#'
+                  ? url.resolve(it.baseId, $ref)
+                  : $ref;
+        var validate = ajv.getSchema(id);
+        if (validate) return validate.schema;
+        throw new Error('can\'t resolve reference ' + $ref + ' from id ' + it.baseId);
       }
     },
     metaSchema: {

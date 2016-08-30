@@ -82,7 +82,7 @@ In the majority of cases `$merge` format is easier to understand and to maintain
 __Please note__:
 
 1. In case the `source` schema or the patch in `with` keyword use `$ref`, they won't take into account the resolution scope for their internal $refs defined by the parent objects - they will be used as separate objects.
-2. At the moment `$ref` in both `source` schema and `with` patch should be absolute (i.e. include schema ID even if the fragment is located in the current file), they don't take take into account current $ref resolution scope (see [#3](https://github.com/epoberezkin/ajv-merge-patch/issues/3)).
+2. `$ref` in both `source` schema and `with` patch take into account current $ref resolution scope (from version 2.0.0).
 
 
 See also:

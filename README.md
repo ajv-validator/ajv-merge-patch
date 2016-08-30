@@ -93,7 +93,7 @@ See also:
 
 ## Usage with Ajv
 
-These keywords are compatible with Ajv version >=4.5.0 and require the option `v5: true`.
+These keywords are compatible with Ajv version >=4.6.0 and require the option `v5: true`.
 
 To add these keywords to Ajv instance:
 

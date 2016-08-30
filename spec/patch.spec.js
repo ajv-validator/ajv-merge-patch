@@ -62,4 +62,30 @@ describe('keyword $patch', function() {
       test(validate, '$patch');
     }
   });
+
+  it.skip('should extend schema defined with relative $ref', function() {
+    ajvInstances.forEach(testMerge);
+
+    function testMerge(ajv) {
+      var schema = {
+        "id": "obj.json#",
+        "definitions": {
+          "source": {
+            "type": "object",
+            "properties": { "p": { "type": "string" } },
+            "additionalProperties": false
+          }
+        },
+        "$patch": {
+          "source": { "$ref": "#/definitions/source" },
+          "with": [
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+          ]
+        }
+      };
+
+      var validate = ajv.compile(schema);
+      test(validate, '$patch');
+    }
+  });
 });

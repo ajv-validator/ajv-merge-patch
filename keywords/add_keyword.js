@@ -20,7 +20,10 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
                   : $ref;
         var validate = ajv.getSchema(id);
         if (validate) return validate.schema;
-        throw new Error('can\'t resolve reference ' + $ref + ' from id ' + it.baseId);
+        var err = new Error('can\'t resolve reference ' + $ref + ' from id ' + it.baseId);
+        err.missingRef = it.resolve.url(it.baseId, $ref);
+        err.missingSchema = it.resolve.normalizeId(it.resolve.fullPath(err.missingRef));
+        throw err;
       }
     },
     metaSchema: {

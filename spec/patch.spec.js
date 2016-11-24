@@ -37,9 +37,9 @@ describe('keyword $patch', function() {
   });
 
   it('should extend schema defined in $ref', function() {
-    ajvInstances.forEach(testMerge);
+    ajvInstances.forEach(testPatch);
 
-    function testMerge(ajv) {
+    function testPatch(ajv) {
       var sourceSchema = {
         "id": "obj.json#",
         "type": "object",
@@ -64,9 +64,9 @@ describe('keyword $patch', function() {
   });
 
   it('should extend schema defined with relative $ref', function() {
-    ajvInstances.forEach(testMerge);
+    ajvInstances.forEach(testPatch);
 
-    function testMerge(ajv) {
+    function testPatch(ajv) {
       var schema = {
         "id": "obj.json#",
         "definitions": {

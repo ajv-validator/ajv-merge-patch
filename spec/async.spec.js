@@ -9,13 +9,13 @@ describe('async schema loading', function() {
   var ajv, loadCount;
 
   beforeEach(function() {
-    ajv = new Ajv({v5: true, loadSchema: loadSchema});
+    ajv = new Ajv({loadSchema: loadSchema});
     addKeywords(ajv);
     loadCount = 0;
   });
 
   describe('$merge', function() {
-    it('should load missing schemas', function (done) {
+    it('should load missing schemas', function() {
       var schema = {
         "$merge": {
           "source": { "$ref": "obj.json#" },
@@ -25,12 +25,12 @@ describe('async schema loading', function() {
         }
       };
 
-      testAsync(schema, '$merge', done);
+      return testAsync(schema, '$merge');
     });
   });
 
   describe('$patch', function() {
-    it('should load missing schemas', function (done) {
+    it('should load missing schemas', function() {
       var schema = {
         "$patch": {
           "source": { "$ref": "obj.json#" },
@@ -40,29 +40,29 @@ describe('async schema loading', function() {
         }
       };
 
-      testAsync(schema, '$patch', done);
+      return testAsync(schema, '$patch');
     });
   });
 
-  function testAsync(schema, keyword, done) {
-    ajv.compileAsync(schema, function (err, validate) {
-      if (err) done(err);
+  function testAsync(schema, keyword) {
+    return ajv.compileAsync(schema)
+    .then(function (validate) {
       assert.strictEqual(loadCount, 1);
       test(validate, keyword);
-      done();
     });
   }
 
-  function loadSchema(ref, callback) {
+  function loadSchema(ref) {
     if (ref == 'obj.json') {
       loadCount++;
-      return callback(null, {
+      var schema = {
         "id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
         "additionalProperties": false
-      });
+      };
+      return Promise.resolve(schema);
     }
-    callback(new Error('404: ' + ref));
+    return Promise.reject(new Error('404: ' + ref));
   }
 });

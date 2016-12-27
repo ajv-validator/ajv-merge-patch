@@ -9,7 +9,7 @@ describe('keyword $merge', function() {
   var ajvInstances;
 
   beforeEach(function() {
-    ajvInstances = [ new Ajv({v5: true}), new Ajv({v5: true}) ];
+    ajvInstances = [ new Ajv, new Ajv ];
     addKeywords(ajvInstances[0]);
     addMerge(ajvInstances[1]);
   });

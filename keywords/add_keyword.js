@@ -3,8 +3,6 @@
 var url = require('url');
 
 module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
-  if (!ajv._opts.v5)
-    throw new Error('keyword ' + keyword + ' requires v5 option');
   ajv.addKeyword(keyword, {
     macro: function (schema, parentSchema, it) {
       var source = schema.source;
@@ -20,10 +18,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
                   : $ref;
         var validate = ajv.getSchema(id);
         if (validate) return validate.schema;
-        var err = new Error('can\'t resolve reference ' + $ref + ' from id ' + it.baseId);
-        err.missingRef = it.resolve.url(it.baseId, $ref);
-        err.missingSchema = it.resolve.normalizeId(it.resolve.fullPath(err.missingRef));
-        throw err;
+        throw new ajv.constructor.MissingRefError(it.baseId, $ref);
       }
     },
     metaSchema: {
@@ -44,7 +39,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
                 }
               }
             },
-            { "$ref": "https://raw.githubusercontent.com/epoberezkin/ajv/master/lib/refs/json-schema-v5.json#" }
+            { "$ref": "http://json-schema.org/draft-06/schema#" }
           ]
         },
         "with": patchSchema

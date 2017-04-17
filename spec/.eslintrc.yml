@@ -4,3 +4,4 @@ globals:
   describe: false
   it: false
   beforeEach: false
+  Promise: false

@@ -9,7 +9,7 @@ describe('keyword $patch', function() {
   var ajvInstances;
 
   beforeEach(function() {
-    ajvInstances = [ new Ajv({v5: true}), new Ajv({v5: true}) ];
+    ajvInstances = [ new Ajv, new Ajv ];
     addKeywords(ajvInstances[0]);
     addPatch(ajvInstances[1]);
   });

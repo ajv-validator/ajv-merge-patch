@@ -37,7 +37,7 @@
     "json-merge-patch": "^0.2.3"
   },
   "devDependencies": {
-    "ajv": "^4.6.0",
+    "ajv": "^5.0.0",
     "coveralls": "^2.11.12",
     "eslint": "^3.3.0",
     "if-node-version": "^1.0.0",

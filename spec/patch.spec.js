@@ -26,7 +26,8 @@ describe('keyword $patch', function() {
             "additionalProperties": false
           },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/properties/r", "value": { "type": "boolean" } }
           ]
         }
       };
@@ -53,7 +54,8 @@ describe('keyword $patch', function() {
         "$patch": {
           "source": { "$ref": "obj.json#" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/properties/r", "value": { "type": "boolean" } }
           ]
         }
       };
@@ -79,7 +81,8 @@ describe('keyword $patch', function() {
         "$patch": {
           "source": { "$ref": "#/definitions/source" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/properties/r", "value": { "type": "boolean" } }
           ]
         }
       };

@@ -20,7 +20,14 @@ describe('async schema loading', function() {
         "$merge": {
           "source": { "$ref": "obj.json#" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            }
           }
         }
       };
@@ -35,7 +42,8 @@ describe('async schema loading', function() {
         "$patch": {
           "source": { "$ref": "obj.json#" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/properties/r", "value": { "type": "boolean" } }
           ]
         }
       };

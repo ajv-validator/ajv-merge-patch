@@ -3,8 +3,8 @@
 var assert = require('assert');
 
 module.exports = function (validate, keyword) {
-  assert.strictEqual(validate({ p: 'abc', q: 1 }), true);
-  assert.strictEqual(validate({ p: 'foo', q: 'bar' }), false);
+  assert.strictEqual(validate({ p: 'abc', q: 1, r: false }), true);
+  assert.strictEqual(validate({ p: 'foo', q: 'bar', r: 'baz' }), false);
   var errs = validate.errors;
   assert.equal(errs.length, 2);
   assert.equal(errs[0].keyword, 'type');

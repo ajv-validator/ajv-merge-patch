@@ -5,12 +5,14 @@
 	"main": "dist/bundle",
 	"typings": "index.d.ts",
 	"scripts": {
+		"_mocha": "_mocha \"spec/*.spec.js\"",
 		"build": "webpack",
 		"eslint": "eslint index.js keywords spec",
 		"prepublish": "npm run build",
-		"test": "npm run eslint && npm run test-cov",
-		"test-spec": "mocha --require @babel/register --reporter spec spec/*.spec.js",
-		"test-cov": "nyc --require @babel/register --exclude dist/** --exclude spec/** --reporter text mocha -- spec/*.spec.js"
+		"test": "npm run eslint && npm run test-spec && npm run test-cov",
+		"test-spec": "npm run -s _mocha -- --require @babel/register --reporter spec",
+		"test-cov": "nyc --require @babel/register --exclude dist/** --exclude spec/** --reporter text npm run -s _mocha",
+		"coverage": "nyc report --reporter text-lcov | coveralls"
 	},
 	"repository": {
 		"type": "git",
@@ -48,8 +50,8 @@
 		"babel-loader": "~8.0.0-beta.0",
 		"coveralls": "^3.0.0",
 		"eslint": "^4.12.1",
-		"mocha": "^4.0.1",
-		"nyc": "^11.3.0",
+		"mocha": "~4.0.1",
+		"nyc": "^11.4.0",
 		"pre-commit": "^1.2.2",
 		"webpack": "^3.10.0"
 	},

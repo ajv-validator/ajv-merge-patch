@@ -2,7 +2,8 @@ env:
   node: true
 extends: 'eslint:recommended'
 parserOptions:
-  ecmaVersion: 5
+  ecmaVersion: 6
+  sourceType: 'module'
 rules:
   indent: [ 2, 2, { SwitchCase: 1 } ]
   no-trailing-spaces: 2

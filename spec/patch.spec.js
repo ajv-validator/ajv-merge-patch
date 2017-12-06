@@ -1,12 +1,10 @@
-'use strict';
-
-var Ajv = require('ajv');
-var addKeywords = require('..');
-var addPatch = require('../keywords/patch');
-var test = require('./test_validate');
+import Ajv from 'ajv';
+import addKeywords from '../index';
+import addPatch from '../keywords/patch';
+import test from './test_validate';
 
 describe('keyword $patch', function() {
-  var ajvInstances;
+  let ajvInstances;
 
   beforeEach(function() {
     ajvInstances = [ new Ajv, new Ajv ];
@@ -18,20 +16,20 @@ describe('keyword $patch', function() {
     ajvInstances.forEach(testPatch);
 
     function testPatch(ajv) {
-      var schema = {
-        "$patch": {
-          "source": {
-            "type": "object",
-            "properties": { "p": { "type": "string" } },
-            "additionalProperties": false
+      const schema = {
+        '$patch': {
+          'source': {
+            'type':                 'object',
+            'properties':           {'p': {'type': 'string'}},
+            'additionalProperties': false
           },
-          "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+          'with':   [
+            {'op': 'add', 'path': '/properties/q', 'value': {'type': 'number'}}
           ]
         }
       };
 
-      var validate = ajv.compile(schema);
+      const validate = ajv.compile(schema);
       test(validate, '$patch');
     }
   });
@@ -40,25 +38,25 @@ describe('keyword $patch', function() {
     ajvInstances.forEach(testPatch);
 
     function testPatch(ajv) {
-      var sourceSchema = {
-        "id": "obj.json#",
-        "type": "object",
-        "properties": { "p": { "type": "string" } },
-        "additionalProperties": false
+      const sourceSchema = {
+        'id':                   'obj.json#',
+        'type':                 'object',
+        'properties':           {'p': {'type': 'string'}},
+        'additionalProperties': false
       };
 
       ajv.addSchema(sourceSchema);
 
-      var schema = {
-        "$patch": {
-          "source": { "$ref": "obj.json#" },
-          "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+      const schema = {
+        '$patch': {
+          'source': {'$ref': 'obj.json#'},
+          'with':   [
+            {'op': 'add', 'path': '/properties/q', 'value': {'type': 'number'}}
           ]
         }
       };
 
-      var validate = ajv.compile(schema);
+      const validate = ajv.compile(schema);
       test(validate, '$patch');
     }
   });
@@ -67,24 +65,24 @@ describe('keyword $patch', function() {
     ajvInstances.forEach(testPatch);
 
     function testPatch(ajv) {
-      var schema = {
-        "id": "obj.json#",
-        "definitions": {
-          "source": {
-            "type": "object",
-            "properties": { "p": { "type": "string" } },
-            "additionalProperties": false
+      const schema = {
+        'id':          'obj.json#',
+        'definitions': {
+          'source': {
+            'type':                 'object',
+            'properties':           {'p': {'type': 'string'}},
+            'additionalProperties': false
           }
         },
-        "$patch": {
-          "source": { "$ref": "#/definitions/source" },
-          "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+        '$patch':      {
+          'source': {'$ref': '#/definitions/source'},
+          'with':   [
+            {'op': 'add', 'path': '/properties/q', 'value': {'type': 'number'}}
           ]
         }
       };
 
-      var validate = ajv.compile(schema);
+      const validate = ajv.compile(schema);
       test(validate, '$patch');
     }
   });

@@ -1,49 +1,47 @@
-'use strict';
+import { resolve } from 'url';
 
-var url = require('url');
-
-module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
+export default function (ajv, keyword, jsonOperation, patchSchema) {
   ajv.addKeyword(keyword, {
-    macro: function (schema, parentSchema, it) {
-      var source = schema.source;
-      var patch = schema.with;
+    macro:      function (schema, parentSchema, it) {
+      let source = schema.source;
+      let patch = schema.with;
       if (source.$ref) source = JSON.parse(JSON.stringify(getSchema(source.$ref)));
       if (patch.$ref) patch = getSchema(patch.$ref);
-      jsonPatch.apply(source, patch, true);
+      jsonOperation(source, patch, true);
       return source;
 
-      function getSchema($ref) {
-        var id = it.baseId && it.baseId != '#'
-                  ? url.resolve(it.baseId, $ref)
-                  : $ref;
-        var validate = ajv.getSchema(id);
+      function getSchema ($ref) {
+        const id = it.baseId && it.baseId !== '#'
+          ? resolve(it.baseId, $ref)
+          : $ref;
+        const validate = ajv.getSchema(id);
         if (validate) return validate.schema;
         throw new ajv.constructor.MissingRefError(it.baseId, $ref);
       }
     },
     metaSchema: {
-      "type": "object",
-      "required": [ "source", "with" ],
-      "additionalProperties": false,
-      "properties": {
-        "source": {
-          "anyOf": [
+      'type':                 'object',
+      'required':             ['source', 'with'],
+      'additionalProperties': false,
+      'properties':           {
+        'source': {
+          'anyOf': [
             {
-              "type": "object",
-              "required": [ "$ref" ],
-              "additionalProperties": false,
-              "properties": {
-                "$ref": {
-                  "type": "string",
-                  "format": "uri"
+              'type':                 'object',
+              'required':             ['$ref'],
+              'additionalProperties': false,
+              'properties':           {
+                '$ref': {
+                  'type':   'string',
+                  'format': 'uri'
                 }
               }
             },
-            { "$ref": "http://json-schema.org/draft-06/schema#" }
+            {'$ref': 'http://json-schema.org/draft-06/schema#'}
           ]
         },
-        "with": patchSchema
+        'with':   patchSchema
       }
     }
   });
-};
+}

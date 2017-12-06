@@ -1,26 +1,24 @@
-'use strict';
+import Ajv from 'ajv';
+import assert from 'assert';
+import addKeywords from '../index';
+import test from './test_validate';
 
-var Ajv = require('ajv');
-var addKeywords = require('..');
-var test = require('./test_validate');
-var assert = require('assert');
-
-describe('async schema loading', function() {
+describe('async schema loading', function () {
   var ajv, loadCount;
 
-  beforeEach(function() {
+  beforeEach(function () {
     ajv = new Ajv({loadSchema: loadSchema});
     addKeywords(ajv);
     loadCount = 0;
   });
 
-  describe('$merge', function() {
-    it('should load missing schemas', function() {
-      var schema = {
-        "$merge": {
-          "source": { "$ref": "obj.json#" },
-          "with": {
-            "properties": { "q": { "type": "number" } }
+  describe('$merge', function () {
+    it('should load missing schemas', function () {
+      const schema = {
+        '$merge': {
+          'source': {'$ref': 'obj.json#'},
+          'with':   {
+            'properties': {'q': {'type': 'number'}}
           }
         }
       };
@@ -29,13 +27,13 @@ describe('async schema loading', function() {
     });
   });
 
-  describe('$patch', function() {
-    it('should load missing schemas', function() {
-      var schema = {
-        "$patch": {
-          "source": { "$ref": "obj.json#" },
-          "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+  describe('$patch', function () {
+    it('should load missing schemas', function () {
+      const schema = {
+        '$patch': {
+          'source': {'$ref': 'obj.json#'},
+          'with':   [
+            {'op': 'add', 'path': '/properties/q', 'value': {'type': 'number'}}
           ]
         }
       };
@@ -44,22 +42,23 @@ describe('async schema loading', function() {
     });
   });
 
-  function testAsync(schema, keyword) {
-    return ajv.compileAsync(schema)
-    .then(function (validate) {
-      assert.strictEqual(loadCount, 1);
-      test(validate, keyword);
-    });
+  function testAsync (schema, keyword) {
+    return ajv
+      .compileAsync(schema)
+      .then(function (validate) {
+        assert.strictEqual(loadCount, 1);
+        test(validate, keyword);
+      });
   }
 
-  function loadSchema(ref) {
-    if (ref == 'obj.json') {
+  function loadSchema (ref) {
+    if (ref === 'obj.json') {
       loadCount++;
-      var schema = {
-        "id": "obj.json#",
-        "type": "object",
-        "properties": { "p": { "type": "string" } },
-        "additionalProperties": false
+      const schema = {
+        'id':                   'obj.json#',
+        'type':                 'object',
+        'properties':           {'p': {'type': 'string'}},
+        'additionalProperties': false
       };
       return Promise.resolve(schema);
     }

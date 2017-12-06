@@ -1,11 +1,9 @@
-'use strict';
-
-var Ajv = require('ajv');
-var addKeywords = require('..');
-var assert = require('assert');
+import Ajv from 'ajv';
+import addKeywords  from '../index';
+import assert  from 'assert';
 
 describe('errors', function() {
-  var ajv;
+  let ajv;
 
   describe('missing $ref', function() {
     beforeEach(function() {
@@ -14,11 +12,11 @@ describe('errors', function() {
     });
 
     it('should throw exception if cannot resolve $ref', function() {
-      var schema = {
-        "$merge": {
-          "source": { "$ref": "obj.json#" },
-          "with": {
-            "properties": { "q": { "type": "number" } }
+      const schema = {
+        '$merge': {
+          'source': {'$ref': 'obj.json#'},
+          'with':   {
+            'properties': {'q': {'type': 'number'}}
           }
         }
       };

@@ -93,13 +93,13 @@ See also:
 
 ## Usage with Ajv
 
-These keywords are compatible with Ajv version >=4.6.0 and require the option `v5: true`.
+These keywords are compatible with Ajv version >=5.1.0-beta.0.
 
 To add these keywords to Ajv instance:
 
 ```javascript
 var Ajv = require('ajv');
-var ajv = new Ajv({ v5: true });
+var ajv = new Ajv();
 require('ajv-merge-patch')(ajv);
 ```
 

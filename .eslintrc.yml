@@ -12,7 +12,7 @@ rules:
   valid-jsdoc: [ 2, { requireReturn: false } ]
   no-invalid-this: 2
   no-unused-vars: [ 2, { args: none } ]
-  no-console: 2
+  no-console: 0
   block-scoped-var: 2
   complexity: [ 2, 9 ]
   curly: [ 2, multi-or-nest, consistent ]

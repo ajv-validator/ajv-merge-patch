@@ -18,7 +18,14 @@ describe('errors', function() {
         "$merge": {
           "source": { "$ref": "obj.json#" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            }
           }
         }
       };

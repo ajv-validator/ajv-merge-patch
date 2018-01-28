@@ -26,7 +26,14 @@ describe('keyword $merge', function() {
             "additionalProperties": false
           },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            }
           }
         }
       };
@@ -53,7 +60,14 @@ describe('keyword $merge', function() {
         "$merge": {
           "source": { "$ref": "obj.json#" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            }
           }
         }
       };
@@ -79,7 +93,14 @@ describe('keyword $merge', function() {
         "$merge": {
           "source": { "$ref": "#/definitions/source" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            }
           }
         }
       };
@@ -101,7 +122,14 @@ describe('keyword $merge', function() {
 
       var patchSchema = {
         "type": "object",
-        "properties": { "q": { "type": "number" } },
+        "properties": {
+          "q": {
+            "type": "number"
+          },
+          "r": {
+            "type": "boolean"
+          }
+        },
         "additionalProperties": false
       };
 
@@ -137,13 +165,66 @@ describe('keyword $merge', function() {
         "definitions": {
           "patch":{
             "type": "object",
-            "properties": { "q": { "type": "number" } },
+            "properties": {
+              "q": {
+                "type": "number"
+              },
+              "r": {
+                "type": "boolean"
+              }
+            },
             "additionalProperties": false
           }
         },
         "$merge": {
           "source": { "$ref": "obj1.json#" },
           "with": { "$ref": "#/definitions/patch" }
+        }
+      };
+
+      var validate = ajv.compile(schema);
+      test(validate, '$merge');
+    }
+  });
+
+  it('should extend schema with an array of merging schemas', function() {
+    ajvInstances.forEach(testMerge);
+
+    function testMerge(ajv) {
+      var sourceSchema = {
+        "type": "object",
+        "properties": { "p": { "type": "string" } },
+        "additionalProperties": false
+      };
+
+      ajv.addSchema(sourceSchema, "obj1.json#");
+
+      var schema = {
+        "id": "obj2.json#",
+        "definitions": {
+          "patch":{
+            "type": "object",
+            "properties": {
+              "q": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "$merge": {
+          "source": { "$ref": "obj1.json#" },
+          "with": [
+            { "$ref": "#/definitions/patch" },
+            {
+              "type": "object",
+              "properties": {
+                "r": {
+                  "type": "boolean"
+                }
+              }
+            }
+          ]
         }
       };
 

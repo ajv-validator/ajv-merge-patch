@@ -23,10 +23,12 @@ describe('keyword $patch', function() {
           "source": {
             "type": "object",
             "properties": { "p": { "type": "string" } },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [ "p" ]
           },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/required/-", "value": "q" }
           ]
         }
       };
@@ -44,7 +46,8 @@ describe('keyword $patch', function() {
         "id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [ "p" ]
       };
 
       ajv.addSchema(sourceSchema);
@@ -53,7 +56,8 @@ describe('keyword $patch', function() {
         "$patch": {
           "source": { "$ref": "obj.json#" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/required/-", "value": "q" }
           ]
         }
       };
@@ -73,13 +77,15 @@ describe('keyword $patch', function() {
           "source": {
             "type": "object",
             "properties": { "p": { "type": "string" } },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [ "p" ]
           }
         },
         "$patch": {
           "source": { "$ref": "#/definitions/source" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/required/-", "value": "q" }
           ]
         }
       };

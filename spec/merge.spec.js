@@ -26,7 +26,8 @@ describe('keyword $merge', function() {
             "additionalProperties": false
           },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": { "q": { "type": "number" } },
+            "required": [ "q" ]
           }
         }
       };
@@ -53,7 +54,8 @@ describe('keyword $merge', function() {
         "$merge": {
           "source": { "$ref": "obj.json#" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": { "q": { "type": "number" } },
+            "required": [ "q" ]
           }
         }
       };
@@ -79,7 +81,8 @@ describe('keyword $merge', function() {
         "$merge": {
           "source": { "$ref": "#/definitions/source" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": { "q": { "type": "number" } },
+            "required": [ "q" ]
           }
         }
       };
@@ -96,13 +99,15 @@ describe('keyword $merge', function() {
       var sourceSchema = {
         "type": "object",
         "properties": { "p": { "type": "string" } },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [ "p" ]
       };
 
       var patchSchema = {
         "type": "object",
         "properties": { "q": { "type": "number" } },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [ "q" ]
       };
 
       ajv.addSchema(sourceSchema, "obj1.json#");
@@ -138,7 +143,8 @@ describe('keyword $merge', function() {
           "patch":{
             "type": "object",
             "properties": { "q": { "type": "number" } },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required" : [ "q" ]
           }
         },
         "$merge": {

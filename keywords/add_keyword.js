@@ -2,14 +2,14 @@
 
 var url = require('url');
 
-module.exports = function (ajv, keyword, jsonPatch, func, patchSchema) {
+module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
   ajv.addKeyword(keyword, {
     macro: function (schema, parentSchema, it) {
       var source = schema.source;
       var patch = schema.with;
       if (source.$ref) source = JSON.parse(JSON.stringify(getSchema(source.$ref)));
       if (patch.$ref) patch = getSchema(patch.$ref);
-      jsonPatch[func].call(null, source, patch, true);
+      jsonPatch.call(null, source, patch, true);
       return source;
 
       function getSchema($ref) {

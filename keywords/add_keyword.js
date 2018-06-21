@@ -39,7 +39,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
                 }
               }
             },
-            { "$ref": "http://json-schema.org/draft-06/schema#" }
+            { "$ref": "http://json-schema.org/draft-07/schema#" }
           ]
         },
         "with": patchSchema

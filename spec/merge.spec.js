@@ -41,7 +41,7 @@ describe('keyword $merge', function() {
 
     function testMerge(ajv) {
       var sourceSchema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
         "additionalProperties": false
@@ -68,7 +68,7 @@ describe('keyword $merge', function() {
 
     function testMerge(ajv) {
       var schema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "definitions": {
           "source": {
             "type": "object",
@@ -133,7 +133,7 @@ describe('keyword $merge', function() {
       ajv.addSchema(sourceSchema, "obj1.json#");
 
       var schema = {
-        "id": "obj2.json#",
+        "$id": "obj2.json#",
         "definitions": {
           "patch":{
             "type": "object",

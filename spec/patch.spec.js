@@ -41,7 +41,7 @@ describe('keyword $patch', function() {
 
     function testPatch(ajv) {
       var sourceSchema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
         "additionalProperties": false
@@ -68,7 +68,7 @@ describe('keyword $patch', function() {
 
     function testPatch(ajv) {
       var schema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "definitions": {
           "source": {
             "type": "object",

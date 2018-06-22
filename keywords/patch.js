@@ -1,10 +1,14 @@
 'use strict';
 
 var addKeyword = require('./add_keyword');
-var jsonPatch = require('fast-json-patch/src/json-patch');
+var jsonPatch = require('fast-json-patch');
+
+function applyPatch (source, patch) {
+  jsonPatch.applyPatch(source, patch, true);
+}
 
 module.exports = function(ajv) {
-  addKeyword(ajv, '$patch', jsonPatch, {
+  addKeyword(ajv, '$patch', applyPatch, {
     "type": "array",
     "items": {
       "type": "object",

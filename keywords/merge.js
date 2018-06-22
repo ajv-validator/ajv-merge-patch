@@ -1,8 +1,8 @@
 'use strict';
 
 var addKeyword = require('./add_keyword');
-var jsonMergePatch = require('json-merge-patch');
+var applyPatch = require('json-merge-patch').apply;
 
 module.exports = function(ajv) {
-  addKeyword(ajv, '$merge', jsonMergePatch, { "type": "object" });
+  addKeyword(ajv, '$merge', applyPatch, { "type": "object" });
 };

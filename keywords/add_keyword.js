@@ -9,7 +9,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
       var patch = schema.with;
       if (source.$ref) source = JSON.parse(JSON.stringify(getSchema(source.$ref)));
       if (patch.$ref) patch = getSchema(patch.$ref);
-      jsonPatch.apply(source, patch, true);
+      jsonPatch(source, patch);
       return source;
 
       function getSchema($ref) {

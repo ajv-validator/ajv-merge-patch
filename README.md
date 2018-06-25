@@ -75,7 +75,7 @@ The same schema extension using `$patch` keyword:
 `$patch` is implemented as a [custom macro keyword](https://github.com/epoberezkin/ajv/blob/master/CUSTOM.md#define-keyword-with-macro-function) using [fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch) package.
 
 
-In the majority of cases `$merge` format is easier to understand and to maintain. `$patch` can be used for extensions and changes that cannot be expressed using `$merge`.
+In the majority of cases `$merge` format is easier to understand and to maintain. `$patch` can be used for extensions and changes that cannot be expressed using `$merge`, e.g. [Adding an array value](https://tools.ietf.org/html/rfc6902#page-18).
 
 `with` property in keywords can also be a reference to a part of some schema, in which case the resolved value will be used rather than the actual object with property `$ref`.
 

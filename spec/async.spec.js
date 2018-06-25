@@ -20,7 +20,8 @@ describe('async schema loading', function() {
         "$merge": {
           "source": { "$ref": "obj.json#" },
           "with": {
-            "properties": { "q": { "type": "number" } }
+            "properties": { "q": { "type": "number" } },
+            "required": [ "q" ]
           }
         }
       };
@@ -35,7 +36,8 @@ describe('async schema loading', function() {
         "$patch": {
           "source": { "$ref": "obj.json#" },
           "with": [
-            { "op": "add", "path": "/properties/q", "value": { "type": "number" } }
+            { "op": "add", "path": "/properties/q", "value": { "type": "number" } },
+            { "op": "add", "path": "/required/-", "value": "q" }
           ]
         }
       };
@@ -59,7 +61,8 @@ describe('async schema loading', function() {
         "id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [ "p" ]
       };
       return Promise.resolve(schema);
     }

@@ -1,6 +1,6 @@
 {
   "name": "ajv-merge-patch",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "$merge and $patch keywords for Ajv JSON-Schema validator to extend schemas",
   "main": "index.js",
   "scripts": {

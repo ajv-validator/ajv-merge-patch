@@ -3,17 +3,17 @@
 var addKeyword = require('./add_keyword');
 var jsonMergePatch = require('json-merge-patch');
 
-function merge(source, other, _, index) {
-  if (!index)
-    index = 0;
+function merge(source, merges) {
+  if (!Array.isArray(merges))
+    return jsonMergePatch.apply(source, merges);
 
-  if (!Array.isArray(other))
-    return jsonMergePatch.apply(source, other);
+  var merged = source;
 
-  if (other.length - index == 1)
-    return jsonMergePatch.apply(source, other[index]);
+  merges.forEach(function (m) {
+    merged = jsonMergePatch.apply(source, m);
+  });
 
-  return merge(jsonMergePatch.apply(source, other[index]), other, null, index + 1);
+  return merged;
 }
 
 module.exports = function (ajv) {

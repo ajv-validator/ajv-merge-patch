@@ -157,4 +157,31 @@ describe('keyword $merge', function() {
       test(validate, '$merge');
     }
   });
+
+  it('should extend schema defined in $merge', function() {
+    ajvInstances.forEach(testMerge);
+
+    function testMerge(ajv) {
+      var schema = {
+        "$merge": {
+          "source": {
+            "type": "object",
+            "properties": { "p": { "type": "string" } },
+            "additionalProperties": false
+          },
+          "with": [
+            {
+              "required": [ "q" ]
+            },
+            {
+              "properties": { "q": { "type": "number" } }
+            }
+          ]
+        }
+      };
+
+      var validate = ajv.compile(schema);
+      test(validate, '$merge');
+    }
+  });
 });

@@ -119,6 +119,17 @@ To include only `$patch` keyword:
 require('ajv-merge-patch/keywords/patch')(ajv);
 ```
 
+# Integration with TypeScript
+
+ajv-merge-patch includes TypeScript definitions.
+
+```typescript
+import * as Ajv from "ajv";
+import * as ajvMergePatch from "ajv-merge-patch";
+const ajv = new Ajv();
+ajvMergePatch(ajv);
+```
+
 ## License
 
 [MIT](https://github.com/epoberezkin/ajv-merge-patch/blob/master/LICENSE)

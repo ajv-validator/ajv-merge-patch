@@ -39,7 +39,7 @@
   "devDependencies": {
     "ajv": "^6.5.1",
     "coveralls": "^2.11.12",
-    "eslint": "^3.3.0",
+    "eslint": "^6.6.0",
     "if-node-version": "^1.0.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",

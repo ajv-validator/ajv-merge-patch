@@ -3,7 +3,8 @@
 var url = require('url');
 
 module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
-  ajv.addKeyword(keyword, {
+  ajv.addKeyword({
+    keyword: keyword,
     macro: function (schema, parentSchema, it) {
       var source = schema.source;
       var patch = schema.with;

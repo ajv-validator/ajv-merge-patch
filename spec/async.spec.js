@@ -1,6 +1,6 @@
 'use strict';
 
-var Ajv = require('ajv');
+var Ajv = require('ajv').default;
 var addKeywords = require('..');
 var test = require('./test_validate');
 var assert = require('assert');
@@ -58,7 +58,7 @@ describe('async schema loading', function() {
     if (ref == 'obj.json') {
       loadCount++;
       var schema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
         "additionalProperties": false,

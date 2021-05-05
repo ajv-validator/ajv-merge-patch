@@ -1,6 +1,6 @@
 'use strict';
 
-var Ajv = require('ajv').default;
+var Ajv = require('ajv');
 var addKeywords = require('..');
 var assert = require('assert');
 

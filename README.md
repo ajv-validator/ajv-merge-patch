@@ -2,9 +2,8 @@
 
 $merge and $patch keywords for [Ajv JSON-Schema validator](https://github.com/epoberezkin/ajv) to extend JSON-schemas
 
-[![Build Status](https://travis-ci.org/epoberezkin/ajv-merge-patch.svg?branch=master)](https://travis-ci.org/epoberezkin/ajv-merge-patch)
+[![build](https://github.com/ajv-validator/ajv-merge-patch/actions/workflows/build.yml/badge.svg)](https://github.com/ajv-validator/ajv-merge-patch/actions/workflows/build.yml)
 [![npm version](https://badge.fury.io/js/ajv-merge-patch.svg)](https://www.npmjs.com/package/ajv-merge-patch)
-[![Code Climate](https://codeclimate.com/github/epoberezkin/ajv-merge-patch/badges/gpa.svg)](https://codeclimate.com/github/epoberezkin/ajv-merge-patch)
 [![Coverage Status](https://coveralls.io/repos/github/epoberezkin/ajv-merge-patch/badge.svg?branch=master)](https://coveralls.io/github/epoberezkin/ajv-merge-patch?branch=master)
 
 

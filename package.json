@@ -34,7 +34,7 @@
   "homepage": "https://github.com/ajv-validator/ajv-merge-patch#readme",
   "dependencies": {
     "fast-json-patch": "^2.0.6",
-    "json-merge-patch": "^0.2.3"
+    "json-merge-patch": "^1.0.2"
   },
   "devDependencies": {
     "ajv": "^8.2.0",

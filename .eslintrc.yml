@@ -4,7 +4,7 @@ extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 5
 rules:
-  indent: [ 2, 2, { SwitchCase: 1 } ]
+  indent-legacy: [ 2, 2, { SwitchCase: 1 } ]
   no-trailing-spaces: 2
   quotes: 0
   linebreak-style: [ 2, unix ]

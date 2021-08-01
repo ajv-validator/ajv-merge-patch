@@ -58,7 +58,7 @@ describe('async schema loading', function() {
     if (ref == 'obj.json') {
       loadCount++;
       var schema = {
-        "id": "obj.json#",
+        "$id": "obj.json#",
         "type": "object",
         "properties": { "p": { "type": "string" } },
         "additionalProperties": false,

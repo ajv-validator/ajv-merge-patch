@@ -19,7 +19,7 @@ module.exports = function (ajv, keyword, jsonPatch, patchSchema) {
                   : $ref;
         var validate = ajv.getSchema(id);
         if (validate) return validate.schema;
-        throw new ajv.constructor.MissingRefError(it.baseId, $ref);
+        throw new ajv.constructor.MissingRefError(it.opts.uriResolver, it.baseId, $ref);
       }
     },
     metaSchema: {

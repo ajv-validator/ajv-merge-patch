@@ -15,7 +15,10 @@ module.exports = function(ajv) {
       },
       "anyOf": [
         {
-          "properties": { "op": { "enum": [ "add", "replace", "test" ] } },
+          "properties": {
+            "op": { "enum": [ "add", "replace", "test" ] },
+            "value": {},
+          },
           "required": [ "value" ]
         },
         {
